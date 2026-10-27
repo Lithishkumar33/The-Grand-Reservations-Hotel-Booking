@@ -1,0 +1,162 @@
+{% extends 'admin/partials/admin_navbar.html' %}
+{% block title %}Bookings | Admin{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* TITLE */
+.page-title {
+    font-weight: 600;
+    color: #111827;
+}
+
+/* CARD */
+.table-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    margin: 0;
+}
+
+thead {
+    background: #111827;
+    color: #fff;
+}
+
+th {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 14px;
+}
+
+td {
+    padding: 14px;
+    font-size: 14px;
+}
+
+/* ROW */
+tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+    transition: all 0.2s ease;
+}
+
+tbody tr:hover {
+    background: #f3f4f6;
+}
+
+/* STATUS */
+.status {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.paid {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.cancelled {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* BUTTON */
+.btn-edit {
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    border: 1px solid #3b82f6;
+    color: #3b82f6;
+    background: transparent;
+    transition: 0.2s;
+}
+
+.btn-edit:hover {
+    background: #3b82f6;
+    color: #fff;
+}
+
+/* EMPTY */
+.empty {
+    text-align: center;
+    color: #6b7280;
+    padding: 40px;
+}
+
+</style>
+
+<h4 class="page-title mb-3">Room Bookings</h4>
+
+<div class="table-card">
+
+<table>
+
+<thead>
+<tr>
+    <th>#</th>
+    <th>User</th>
+    <th>Room</th>
+    <th>Check In</th>
+    <th>Check Out</th>
+    <th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for b in bookings %}
+<tr>
+
+<td>{{ forloop.counter }}</td>
+
+<td><strong>{{ b.user.username }}</strong></td>
+
+<td>Room {{ b.room.room_number }}</td>
+
+<td>{{ b.check_in }}</td>
+
+<td>{{ b.check_out }}</td>
+
+<td>
+    {% if b.status == 'Pending' %}
+        <span class="status pending">Pending</span>
+    {% elif b.status == 'Paid' %}
+        <span class="status paid">Confirmed</span>
+    {% elif b.status == 'Cancelled' %}
+        <span class="status cancelled">Cancelled</span>
+    {% else %}
+        <span class="status">{{ b.status }}</span>
+    {% endif %}
+</td>
+
+</tr>
+
+{% empty %}
+<tr>
+<td colspan="7" class="empty">
+No bookings found
+</td>
+</tr>
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

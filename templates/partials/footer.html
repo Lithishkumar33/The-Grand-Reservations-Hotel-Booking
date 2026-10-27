@@ -1,0 +1,231 @@
+<style>
+
+/* 🌌 FOOTER BASE */
+.footer-premium {
+    position: relative;
+    background: radial-gradient(circle at top,#0f172a,#020617);
+    padding: 70px 20px 30px;
+    color: #e2e8f0;
+    overflow: hidden;
+}
+
+/* 🔥 GLOW EFFECT */
+.footer-premium::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle,#38bdf8,transparent 70%);
+    top: -150px;
+    left: -150px;
+    filter: blur(120px);
+    opacity: 0.3;
+}
+
+/* GRID */
+.footer-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* COLUMN */
+.footer-col {
+    flex: 1;
+    min-width: 260px;
+}
+
+/* BRAND */
+.footer-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+
+    background: linear-gradient(90deg,#38bdf8,#6366f1,#ec4899);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* TAGLINE */
+.footer-tag {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 15px;
+}
+
+/* CONTACT */
+.footer-contact p {
+    font-size: 14px;
+    color: #cbd5f5;
+    margin: 6px 0;
+}
+
+/* LINKS */
+.footer-links a {
+    display: block;
+    color: #94a3b8;
+    margin: 6px 0;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: #38bdf8;
+    transform: translateX(4px);
+}
+
+/* FORM */
+.footer-form input,
+.footer-form textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.footer-form input:focus,
+.footer-form textarea:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56,189,248,0.5);
+}
+
+/* BUTTON */
+.footer-btn {
+    width: 100%;
+    background: linear-gradient(45deg,#38bdf8,#6366f1);
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    color: #fff;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.footer-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #38bdf8;
+}
+
+/* WHATSAPP BUTTON */
+.whatsapp-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: #25D366;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #25D366;
+}
+
+/* DIVIDER */
+.footer-divider {
+    margin: 40px 0 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* COPYRIGHT */
+.footer-copy {
+    text-align: center;
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .footer-grid {
+        flex-direction: column;
+    }
+}
+
+</style>
+
+<footer class="footer-premium">
+
+<div class="container">
+
+<div class="footer-grid">
+
+<!-- BRAND -->
+<div class="footer-col">
+
+<div class="footer-brand">
+The Grand Reservations
+</div>
+
+<div class="footer-tag">
+Luxury stays & unforgettable journeys crafted just for you.
+</div>
+
+<div class="footer-contact">
+<p>📞 9380387678</p>
+<p>📞 7338547451</p>
+<p>📧 7760lithish@gmail.com</p>
+</div>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/919380387678" class="whatsapp-btn">
+💬 Chat on WhatsApp
+</a>
+
+</div>
+
+<!-- LINKS -->
+<div class="footer-col">
+
+<div class="footer-brand">Explore</div>
+
+<div class="footer-links">
+<a href="{% url 'home' %}">Home</a>
+<a href="{% url 'rooms' %}">Rooms</a>
+<a href="{% url 'trips' %}">Trips</a>
+</div>
+
+</div>
+
+<!-- ENQUIRY -->
+<div class="footer-col">
+
+<div class="footer-brand">Quick Enquiry</div>
+
+<form method="post" action="{% url 'quick_enquiry' %}" class="footer-form">
+{% csrf_token %}
+
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<input type="text" name="mobile" placeholder="Mobile Number" required>
+
+<textarea name="message" rows="3" placeholder="Your Message" required></textarea>
+
+<button class="footer-btn">
+Send Enquiry
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<div class="footer-divider"></div>
+
+<div class="footer-copy">
+© 2026 The Grand Reservations • Designed for premium experiences
+</div>
+
+</div>
+
+</footer>

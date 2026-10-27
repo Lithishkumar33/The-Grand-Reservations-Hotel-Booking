@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    color: #111;
+}
+
+/* ===== HEADER (FIXED ALIGNMENT) ===== */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+}
+
+/* LOGO */
+.brand-img {
+    height: 55px;
+    margin-right: 15px;
+    border-radius: 10px;
+}
+
+/* COMPANY NAME (BIGGER + CLEAN) */
+.brand-text {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;   /* ✅ increased */
+    font-weight: 600;
+    letter-spacing: 2px;
+
+    background: linear-gradient(90deg,#facc15,#fb7185,#38bdf8,#a78bfa);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* LINE */
+.hr {
+    border-top: 1px solid #999;
+    margin: 10px 20px;
+}
+
+/* CONTENT */
+.container {
+    padding: 15px 20px;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid #444;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.label {
+    font-weight: bold;
+    width: 30%;
+}
+
+/* TOTAL */
+.total {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* STAMP (FIXED POSITION) */
+.stamp {
+    position: absolute;
+    right: 60px;
+    top: 60%;
+
+    border: 3px solid red;
+    padding: 10px 16px;
+    border-radius: 50%;
+    color: red;
+    font-weight: bold;
+
+    transform: rotate(-15deg);
+}
+
+/* SIGNATURE */
+.signature {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sign-line {
+    border-top: 1px solid #000;
+    width: 250px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+    <img src="{% static 'images/logo1.png' %}" class="brand-img">
+
+    <div class="brand-text">
+        The Grand Reservations
+    </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- ===== CONTENT ===== -->
+<div class="container">
+
+<table>
+
+<tr>
+<td class="label">Customer Name</td>
+<td>{{ booking.user.username }}</td>
+</tr>
+
+<tr>
+<td class="label">Booking Date</td>
+<td>{{ booking.booking_date }}</td>
+</tr>
+
+<tr>
+<td class="label">Trip Name</td>
+<td>{{ booking.trip.trip_name }}</td>
+</tr>
+
+<tr>
+<td class="label">Destination</td>
+<td>{{ booking.trip.destination }}</td>
+</tr>
+
+<tr>
+<td class="label">Guide Option</td>
+<td>{{ booking.guide_option }}</td>
+</tr>
+
+<tr>
+<td class="label">Duration</td>
+<td>{{ booking.start_date }} → {{ booking.end_date }}</td>
+</tr>
+
+</table>
+
+<!-- TOTAL -->
+<div class="total">
+    Total Paid: ₹ {{ booking.total_price }}
+</div>
+
+<!-- STAMP -->
+<div class="stamp">
+    VERIFIED
+</div>
+
+<!-- SIGNATURE -->
+<div class="signature">
+
+<div>
+    <div class="sign-line"></div>
+    Customer Signature
+</div>
+
+<div>
+    <div class="sign-line"></div>
+    Authorized Signature
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

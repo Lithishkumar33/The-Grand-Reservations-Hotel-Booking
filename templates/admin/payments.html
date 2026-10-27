@@ -1,0 +1,161 @@
+{% extends 'admin/partials/admin_navbar.html' %}
+{% block title %}Payments | Admin{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* TITLE */
+.page-title {
+    font-weight: 600;
+    color: #111827;
+}
+
+/* CARD */
+.table-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+}
+
+thead {
+    background: #111827;
+    color: #fff;
+}
+
+th {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 14px;
+}
+
+td {
+    padding: 14px;
+    font-size: 14px;
+}
+
+/* ROW */
+tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+    transition: 0.2s;
+}
+
+tbody tr:hover {
+    background: #f3f4f6;
+}
+
+/* BADGES */
+.badge-method {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* METHOD COLORS */
+.upi {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.card {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.cash {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+/* AMOUNT */
+.amount {
+    font-weight: 600;
+    color: #111827;
+}
+
+/* DATE */
+.date {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+/* EMPTY */
+.empty {
+    text-align: center;
+    color: #6b7280;
+    padding: 40px;
+}
+
+</style>
+
+<h4 class="page-title mb-3">Payments</h4>
+
+<div class="table-card">
+
+<table>
+
+<thead>
+<tr>
+<th>#</th>
+<th>Booking</th>
+<th>Method</th>
+<th>Amount</th>
+<th>Date</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for p in payments %}
+<tr>
+
+<td>{{ forloop.counter }}</td>
+
+<td>
+    <strong>#{{ p.booking.id }}</strong>
+</td>
+
+<td>
+    {% if p.payment_method == "UPI" %}
+        <span class="badge-method upi">UPI</span>
+    {% elif p.payment_method == "Card" %}
+        <span class="badge-method card">Card</span>
+    {% elif p.payment_method == "Cash" %}
+        <span class="badge-method cash">Cash</span>
+    {% else %}
+        <span class="badge-method">{{ p.payment_method }}</span>
+    {% endif %}
+</td>
+
+<td class="amount">
+    ₹ {{ p.amount_paid }}
+</td>
+
+<td class="date">
+    {{ p.paid_on }}
+</td>
+
+</tr>
+
+{% empty %}
+<tr>
+<td colspan="5" class="empty">
+No payments recorded
+</td>
+</tr>
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

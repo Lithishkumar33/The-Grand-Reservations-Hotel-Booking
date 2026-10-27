@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+
+{% block title %}The Grand Reservations{% endblock %}
+
+{% block styles %}
+<style>
+
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:#000;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* LOADER */
+#loader{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.loader-text{
+    font-size:28px;
+    letter-spacing:2px;
+    margin-bottom:20px;
+    animation:fadeText 1.5s ease infinite alternate;
+}
+
+.loader-bar{
+    width:200px;
+    height:3px;
+    background:#333;
+    overflow:hidden;
+}
+
+.loader-bar::after{
+    content:"";
+    display:block;
+    width:40%;
+    height:100%;
+    background:#e50914;
+    animation:loading 1.2s linear infinite;
+}
+
+@keyframes loading{
+    0%{transform:translateX(-100%);}
+    100%{transform:translateX(250%);}
+}
+
+@keyframes fadeText{
+    from{opacity:0.5;}
+    to{opacity:1;}
+}
+
+/* HERO */
+.hero{
+position:relative;
+height:100vh;
+overflow:hidden;
+}
+
+.hero-bg{
+position:absolute;
+width:100%;
+height:100%;
+background:url("https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1") center/cover no-repeat;
+animation:zoomBg 20s ease-in-out infinite alternate;
+z-index:-2;
+}
+
+/* OVERLAY */
+.hero::after{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(
+to top,
+rgba(0,0,0,0.95),
+rgba(0,0,0,0.5)
+);
+z-index:-1;
+}
+
+/* CONTENT */
+.hero-content{
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+animation:fadeUp 1.5s ease;
+}
+
+/* TITLE */
+.hero-title{
+font-size:60px;
+font-weight:700;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+perspective:1000px;
+}
+
+.space{
+width:12px;
+}
+
+.hero-title span{
+display:inline-block;
+opacity:0;
+transform:translateY(80px) scale(0.7) rotateX(90deg);
+animation:
+fadeZoom 1s ease forwards,
+floatWave 3s ease-in-out infinite;
+}
+
+/* STAGGER */
+.hero-title span:nth-child(1){animation-delay:0.05s,1.2s;}
+.hero-title span:nth-child(2){animation-delay:0.1s,1.3s;}
+.hero-title span:nth-child(3){animation-delay:0.15s,1.4s;}
+.hero-title span:nth-child(4){animation-delay:0.2s,1.5s;}
+.hero-title span:nth-child(5){animation-delay:0.25s,1.6s;}
+.hero-title span:nth-child(6){animation-delay:0.3s,1.7s;}
+.hero-title span:nth-child(8){animation-delay:0.35s,1.8s;}
+.hero-title span:nth-child(9){animation-delay:0.4s,1.9s;}
+.hero-title span:nth-child(10){animation-delay:0.45s,2s;}
+.hero-title span:nth-child(11){animation-delay:0.5s,2.1s;}
+.hero-title span:nth-child(12){animation-delay:0.55s,2.2s;}
+.hero-title span:nth-child(13){animation-delay:0.6s,2.3s;}
+.hero-title span:nth-child(15){animation-delay:0.65s,2.4s;}
+.hero-title span:nth-child(16){animation-delay:0.7s,2.5s;}
+.hero-title span:nth-child(17){animation-delay:0.75s,2.6s;}
+.hero-title span:nth-child(18){animation-delay:0.8s,2.7s;}
+.hero-title span:nth-child(19){animation-delay:0.85s,2.8s;}
+.hero-title span:nth-child(20){animation-delay:0.9s,2.9s;}
+.hero-title span:nth-child(21){animation-delay:0.95s,3s;}
+
+@keyframes fadeZoom{
+0%{opacity:0; transform:translateY(80px) scale(0.7) rotateX(90deg);}
+60%{opacity:1; transform:translateY(-10px) scale(1.05);}
+100%{opacity:1; transform:translateY(0) scale(1);}
+}
+
+@keyframes floatWave{
+0%{transform:translateY(0);}
+50%{transform:translateY(-6px);}
+100%{transform:translateY(0);}
+}
+
+.hero-title span{
+text-shadow:0 0 10px rgba(255,255,255,0.4);
+}
+
+/* BUTTON */
+.btn-explore{
+background:#e50914;
+border:none;
+padding:14px 28px;
+font-weight:600;
+margin-top:20px;
+border-radius:6px;
+}
+
+.btn-explore:hover{
+transform:scale(1.08);
+background:#ff1e1e;
+}
+
+/* GLASS */
+.glass-box{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+padding:15px 25px;
+border-radius:30px;
+margin-top:20px;
+}
+
+@keyframes fadeUp{
+from{opacity:0; transform:translateY(40px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes zoomBg{
+from{transform:scale(1);}
+to{transform:scale(1.15);}
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="hero">
+
+<div class="hero-bg"></div>
+
+<div class="hero-content">
+
+<h1 class="hero-title">
+<span>T</span><span>r</span><span>a</span><span>v</span><span>e</span><span>l</span>
+<span class="space"></span>
+<span>B</span><span>e</span><span>y</span><span>o</span><span>n</span><span>d</span>
+<span class="space"></span>
+<span>L</span><span>i</span><span>m</span><span>i</span><span>t</span><span>s</span>
+</h1>
+
+<div class="glass-box">
+Luxury rooms • Exotic trips • Seamless booking
+</div>
+
+<div class="glass-box">
+Experience premium travel like never before
+</div>
+
+<a href="{% url 'explore' %}" class="btn btn-explore">
+Explore Now →
+</a>
+
+</div>
+
+</div>
+
+{% endblock %}

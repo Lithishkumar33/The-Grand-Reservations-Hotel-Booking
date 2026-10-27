@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | The Grand Reservations</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+
+            background: linear-gradient(-60deg,#0f172a,#1e3a8a,#6d28d9,#be185d);
+            background-size: 500% 500%;
+            animation: gradientMove 10s ease infinite;
+
+            color: #fff;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .admin-btn {
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 8px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        .admin-btn:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.05);
+        }
+
+        /* MAIN CONTAINER */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 80px);
+            padding: 20px;
+        }
+
+        .auth-box {
+            display: flex;
+            width: 100%;
+            max-width: 1000px;
+
+            border-radius: 20px;
+            overflow: hidden;
+
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(18px);
+
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+
+            animation: fadeUp 0.8s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* LEFT SIDE */
+        .auth-left {
+            flex: 1;
+            padding: 60px;
+        }
+
+        #type-text {
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .gradient-word {
+            background: linear-gradient(90deg,#facc15,#f472b6,#22d3ee);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .auth-left p {
+            margin-top: 20px;
+            color: rgba(255,255,255,0.85);
+            font-size: 15px;
+        }
+
+        /* RIGHT SIDE */
+        .auth-right {
+            flex: 1;
+            background: #ffffff;
+            color: #111;
+            padding: 50px;
+        }
+
+        .auth-right h4 {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* INPUT */
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 10px rgba(99,102,241,0.4);
+        }
+
+        /* BUTTON */
+        .btn-login {
+            background: linear-gradient(45deg,#6366f1,#ec4899);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(236,72,153,0.5);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #6366f1;
+            font-weight: 500;
+        }
+
+        /* 🔥 LOADER */
+        #loader{
+            position:fixed;
+            width:100%;
+            height:100%;
+            background:#0f172a;
+            display:none;
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
+        }
+
+        .loader-text{
+            font-size:26px;
+            letter-spacing:2px;
+            margin-bottom:20px;
+        }
+
+        .loader-bar{
+            width:220px;
+            height:3px;
+            background:#333;
+            overflow:hidden;
+        }
+
+        .loader-bar::after{
+            content:"";
+            display:block;
+            width:40%;
+            height:100%;
+            background:linear-gradient(90deg,#6366f1,#ec4899);
+            animation:loading 1.2s linear infinite;
+        }
+
+        @keyframes loading{
+            0%{transform:translateX(-100%);}
+            100%{transform:translateX(250%);}
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- 🔥 LOADER -->
+<div id="loader">
+    <div>
+        <h2 class="loader-text">The Grand Reservations</h2>
+        <div class="loader-bar"></div>
+    </div>
+</div>
+
+<div class="top-bar">
+    <div class="brand">The Grand Reservations</div>
+    <a href="/admin/login/" class="admin-btn">Admin Login</a>
+</div>
+
+<div class="auth-container">
+
+    <div class="auth-box">
+
+        <div class="auth-left">
+            <h1 id="type-text"></h1>
+            <p>
+                Manage bookings, payments, and premium guest experiences
+                with a modern luxury reservation platform.
+            </p>
+        </div>
+
+        <div class="auth-right">
+
+            <h4>Log in </h4>
+            <!-- 🔥 ERROR MESSAGE -->
+
+{% if error %}
+
+<div class="alert alert-danger alert-dismissible fade show">
+
+    {{ error }}
+
+    <button type="button"
+            class="close"
+            data-dismiss="alert">
+
+        &times;
+
+    </button>
+
+</div>
+
+{% endif %}
+
+<!-- 🔥 SUCCESS MESSAGE -->
+
+{% if messages %}
+
+    {% for message in messages %}
+
+    <div class="alert alert-success alert-dismissible fade show">
+
+        {{ message }}
+
+        <button type="button"
+                class="close"
+                data-dismiss="alert">
+
+            &times;
+
+        </button>
+
+    </div>
+
+    {% endfor %}
+
+{% endif %}
+
+            <form method="post" id="loginForm" autocomplete="off">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-login btn-block mt-3">
+                    Login
+                </button>
+            </form>
+
+            <div class="signup-link">
+                Don’t have an account?
+                <a href="/accounts/signup/">Sign up</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* TEXT ANIMATION */
+const lines = ["Every Trip Tells a Story","Every Hotel Holds","One"];
+let i=0,j=0;
+
+function typeLine(){
+if(i<lines.length){
+if(j<lines[i].length){
+let char=lines[i][j];
+if(i===2){
+document.getElementById("type-text").innerHTML+='<span class="gradient-word">'+char+'</span>';
+}else{
+document.getElementById("type-text").innerHTML+=char;
+}
+j++; setTimeout(typeLine,40);
+}else{
+document.getElementById("type-text").innerHTML+="<br>";
+i++; j=0; setTimeout(typeLine,300);
+}
+}
+}
+
+window.onload = typeLine;
+
+/* 🔥 LOGIN CLICK LOADER */
+document.getElementById("loginForm").addEventListener("submit", function(e){
+
+let username = document.querySelector("[name='username']").value.trim();
+let password = document.querySelector("[name='password']").value.trim();
+
+if(username === "" || password === ""){
+e.preventDefault();
+alert("⚠️ Please fill all fields");
+return;
+}
+
+if(password.length < 4){
+e.preventDefault();
+alert("⚠️ Password must be at least 4 characters");
+return;
+}
+
+/* SHOW LOADER */
+const loader = document.getElementById("loader");
+loader.style.display = "flex";
+
+/* UX */
+document.querySelector(".btn-login").innerText = "Logging...";
+document.querySelector(".btn-login").disabled = true;
+
+});
+
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

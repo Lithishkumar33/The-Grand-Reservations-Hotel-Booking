@@ -1,0 +1,283 @@
+{% extends 'admin/partials/admin_navbar.html' %}
+{% block content %}
+
+<style>
+
+/* HEADER FLEX */
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* TITLE */
+.page-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #111827;
+}
+
+/* ADD BUTTON */
+.btn-add {
+    background: #111827;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.btn-add:hover {
+    background: #000;
+}
+
+/* CARD */
+.table-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+}
+
+thead {
+    background: #111827;
+    color: #fff;
+}
+
+th {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 14px;
+}
+
+td {
+    padding: 14px;
+    font-size: 14px;
+}
+
+/* ROW */
+tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+    transition: 0.2s;
+}
+
+tbody tr:hover {
+    background: #f3f4f6;
+}
+
+/* TEXT */
+.user-name {
+    font-weight: 500;
+}
+
+.trip-name {
+    font-weight: 500;
+}
+
+.muted {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* BADGES */
+.badge-custom {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-guide {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.badge-noguide {
+    background: #f1f5f9;
+    color: #374151;
+}
+
+.badge-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-paid {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-cancel {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ACTION BUTTONS */
+.btn-action {
+    border-radius: 6px;
+    font-size: 12px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    transition: 0.2s;
+}
+
+/* EDIT */
+.btn-edit {
+    border: 1px solid #3b82f6;
+    color: #3b82f6;
+    background: transparent;
+}
+
+.btn-edit:hover {
+    background: #3b82f6;
+    color: #fff;
+}
+
+/* DELETE */
+.btn-delete {
+    border: 1px solid #ef4444;
+    color: #ef4444;
+    background: transparent;
+}
+
+.btn-delete:hover {
+    background: #ef4444;
+    color: #fff;
+}
+
+/* ASSIGN */
+.btn-assign {
+    border: 1px solid #10b981;
+    color: #10b981;
+    background: transparent;
+}
+
+.btn-assign:hover {
+    background: #10b981;
+    color: #fff;
+}
+
+/* EMPTY */
+.empty {
+    text-align: center;
+    color: #6b7280;
+    padding: 40px;
+}
+
+</style>
+
+<!-- HEADER -->
+<div class="header-flex mb-3">
+
+    <h4 class="page-title">Trip Bookings</h4>
+
+    <a href="/admin/add-trip/" class="btn btn-add">
+        + Add Trip
+    </a>
+
+</div>
+
+<div class="table-card">
+
+<table>
+
+<thead>
+<tr>
+<th>User</th>
+<th>Trip</th>
+<th>Guide</th>
+<th>Status</th>
+<th>Staff</th>
+<th style="width: 240px;">Actions</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for b in bookings %}
+<tr>
+
+<td>
+    <div class="user-name">{{ b.user.username }}</div>
+</td>
+
+<td>
+    <div class="trip-name">{{ b.trip.trip_name }}</div>
+    <div class="muted">📍 {{ b.trip.destination }}</div>
+</td>
+
+<td>
+    {% if b.guide_option == "Guide" %}
+        <span class="badge-custom badge-guide">With Guide</span>
+    {% else %}
+        <span class="badge-custom badge-noguide">No Guide</span>
+    {% endif %}
+</td>
+
+<td>
+    {% if b.status == "Pending" %}
+        <span class="badge-custom badge-pending">Pending</span>
+    {% elif b.status == "Paid" %}
+        <span class="badge-custom badge-paid">Confirmed</span>
+    {% elif b.status == "Cancelled" %}
+        <span class="badge-custom badge-cancel">Cancelled</span>
+    {% endif %}
+</td>
+
+<td>
+    {% if b.assigned_staff %}
+        {{ b.assigned_staff }}
+    {% else %}
+        <span class="muted">Not Assigned</span>
+    {% endif %}
+</td>
+
+<td>
+
+   <!-- ASSIGN STAFF -->
+
+{% if b.guide_option == "Guide" %}
+
+    {% if b.assigned_staff %}
+
+        <!-- 🔒 LOCKED -->
+        <button class="btn btn-action btn-secondary" disabled>
+            Assigned
+        </button>
+
+    {% else %}
+
+        <!-- ✅ ACTIVE -->
+        <a href="/admin/assign-staff/{{ b.id }}/"
+           class="btn btn-action btn-assign">
+           Assign
+        </a>
+
+    {% endif %}
+
+{% endif %}
+
+    
+
+</td>
+
+</tr>
+
+{% empty %}
+<tr>
+<td colspan="6" class="empty">
+No trip bookings found
+</td>
+</tr>
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

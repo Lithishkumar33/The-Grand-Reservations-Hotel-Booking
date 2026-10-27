@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+
+<script>
+
+var options = {
+    "key": "{{ razorpay_key }}",
+    "amount": "{{ order.amount }}",
+    "currency": "INR",
+    "name": "The Grand Reservations",
+    "description": "Trip Booking",
+    "order_id": "{{ order.id }}",
+
+    "handler": function (response) {
+        window.location.href = "/trip-payment-success/{{ booking.id }}/";
+    },
+
+    "theme": {
+        "color": "#6366f1"
+    }
+};
+
+var rzp = new Razorpay(options);
+rzp.open();
+
+</script>
+
+</body>
+</html>

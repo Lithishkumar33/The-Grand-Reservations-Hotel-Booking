@@ -1,0 +1,172 @@
+{% extends 'admin/partials/admin_navbar.html' %}
+{% block content %}
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body {
+    background: #0f172a;
+    font-family: 'Poppins', sans-serif;
+    color: #e5e7eb;
+}
+
+/* HEADER */
+.dashboard-header {
+    background: linear-gradient(120deg,#6366f1,#9333ea,#ec4899);
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+/* CARDS */
+.stat-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* VALUE */
+.stat-value {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* CHART */
+.chart-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+</style>
+
+<div class="container-fluid mt-4 px-4">
+
+    <!-- HEADER -->
+    <div class="dashboard-header">
+        <h3>Admin Dashboard</h3>
+        <p>Overview of system performance</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-value counter" data-target="{{ total_rooms|default:0 }}">0</div>
+                <small>Total Rooms</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-value counter" data-target="{{ available_rooms|default:0 }}">0</div>
+                <small>Available Rooms</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-value counter" data-target="{{ total_bookings|default:0 }}">0</div>
+                <small>Bookings</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-value counter" data-target="{{ total_payments|default:0 }}">0</div>
+                <small>Revenue</small>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CHARTS -->
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="chart-card">
+                <h5>Bookings Overview</h5>
+                <canvas id="bookingChart"></canvas>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="chart-card">
+                <h5>Trips vs Rooms</h5>
+                <canvas id="tripChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- COUNTER SCRIPT (FIXED) -->
+<script>
+document.querySelectorAll('.counter').forEach(counter => {
+    let target = parseInt(counter.getAttribute('data-target')) || 0;
+    let count = 0;
+
+    let update = () => {
+        let increment = target / 50;
+
+        if (count < target) {
+            count += increment;
+            counter.innerText = Math.floor(count);
+            setTimeout(update, 20);
+        } else {
+            counter.innerText = target;
+        }
+    };
+
+    update();
+});
+</script>
+
+<!-- CHART SCRIPT (FULLY SAFE) -->
+<script>
+
+let totalRooms = parseInt("{{ total_rooms|default:0 }}");
+let totalTrips = parseInt("{{ total_trips|default:0 }}");
+
+// BOOKINGS LINE CHART
+new Chart(document.getElementById('bookingChart'), {
+    type: 'line',
+    data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+            label: 'Bookings',
+            data: [12, 19, 8, 15, 22, 30],
+            borderColor: '#6366f1',
+            fill: false
+        }]
+    }
+});
+
+// BAR CHART
+new Chart(document.getElementById('tripChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Rooms','Trips'],
+        datasets: [{
+            label: 'Count',
+            data: [totalRooms, totalTrips],
+            backgroundColor: ['#6366f1','#ec4899']
+        }]
+    }
+});
+
+</script>
+
+{% endblock %}

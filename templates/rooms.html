@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rooms | The Grand Reservations</title>
+
+    <link rel="stylesheet"
+     href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8fafc;
+            color: #111827;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .page-header h2 {
+            font-weight: 600;
+        }
+
+        .page-header p {
+            color: #6b7280;
+        }
+
+        .search-box {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .btn-search {
+            background: #111827;
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .btn-search:hover {
+            background: #000;
+        }
+
+        .room-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .room-img {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .room-body {
+            padding: 18px;
+        }
+
+        .room-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .room-meta {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .room-price {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .btn-view {
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .empty-text {
+            text-align: center;
+            margin-top: 50px;
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+{% include 'partials/header.html' %}
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <h2>Find Your Perfect Stay</h2>
+        <p>Explore luxury rooms across locations</p>
+    </div>
+
+    <!-- SEARCH -->
+    <form method="get">
+        <div class="search-box">
+            <div class="row">
+
+                <div class="col-md-8">
+                   <select name="location" class="form-control">
+    <option value="">Choose Location</option>
+
+    {% for loc in locations %}
+    <option value="{{ loc }}"
+    {% if request.GET.location == loc %}selected{% endif %}>
+        {{ loc }}
+    </option>
+    {% endfor %}
+</select>
+                </div>
+
+                <div class="col-md-4">
+                    <button class="btn btn-search btn-block">
+                        Search Rooms
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <!-- ROOMS -->
+    {% if selected_location %}
+
+<h4 class="text-center mb-4">
+    Rooms in {{ selected_location }}
+</h4>
+
+{% for hotel, rooms in grouped_hotels.items %}
+
+<div class="mb-3">
+    <h5>{{ hotel }}</h5>
+    <p class="room-meta">📍 {{ selected_location }}</p>
+</div>
+
+<div class="row">
+
+    {% for room in rooms %}
+    <div class="col-md-4 mb-4">
+
+        <div class="room-card">
+
+            {% with room.images.first as img %}
+                {% if img %}
+                    <img src="{{ img.image.url }}" class="room-img w-100">
+                {% else %}
+                    <img src="https://via.placeholder.com/400x220?text=No+Image"
+                         class="room-img w-100">
+                {% endif %}
+            {% endwith %}
+
+            <div class="room-body">
+
+                <div class="room-title">
+                    Room {{ room.room_number }}
+                </div>
+
+                <div class="room-meta mb-2">
+                    {{ room.room_type }} • {{ room.location }}
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div class="room-price">
+                        ₹ {{ room.price_room_only }}
+                    </div>
+
+                    <a href="{% url 'room_detail' room.id %}"
+                       class="btn btn-dark btn-view">
+                       View
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="text-center mt-5">
+    <p class="empty-text">
+        🔍 Select a location above to explore available rooms
+    </p>
+</div>
+
+{% endif %}
+</div>
+
+{% include 'partials/footer.html' %}
+
+</body>
+</html>

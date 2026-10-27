@@ -1,0 +1,317 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{ trip.trip_name }} | The Grand Reservations</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<style>
+
+body{
+    background:#f4f6f9;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* HERO IMAGE */
+.trip-image{
+    height:420px;
+    object-fit:cover;
+    border-radius:16px;
+}
+
+/* TITLE */
+.trip-title{
+    font-weight:700;
+}
+
+/* BOOKING BOX */
+.booking-box{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 90px;
+}
+
+/* PRICE */
+.price-tag{
+    font-size:26px;
+    font-weight:700;
+    color:#e63946;
+}
+
+/* BADGE */
+.badge-famous{
+    background:#facc15;
+    color:#000;
+    font-weight:500;
+    padding:5px 10px;
+    border-radius:6px;
+    font-size:12px;
+}
+
+/* ================= INCLUSION / EXCLUSION ================= */
+
+.info-card{
+    border-radius:16px;
+    padding:25px 30px;
+    margin-bottom:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    position:relative;
+    transition:0.3s;
+}
+
+.info-card:hover{
+    transform:translateY(-4px);
+}
+
+.info-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:25px;
+    width:6px;
+    height:45px;
+    border-radius:4px;
+}
+
+/* INCLUSION */
+.inclusion-card{
+    background:#eef8f1;
+}
+.inclusion-card::before{
+    background:#22c55e;
+}
+
+/* EXCLUSION */
+.exclusion-card{
+    background:#fdecec;
+}
+.exclusion-card::before{
+    background:#ef4444;
+}
+
+/* TITLE */
+.info-title{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+/* LIST */
+.info-list{
+    list-style:none;
+    padding:0;
+}
+
+.info-list li{
+    display:flex;
+    align-items:flex-start;
+    margin-bottom:12px;
+    font-size:15px;
+}
+
+/* ICONS */
+.icon-check{
+    color:#22c55e;
+    margin-right:10px;
+    font-weight:bold;
+}
+
+.icon-cross{
+    color:#ef4444;
+    margin-right:10px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+{% include 'partials/header.html' %}
+
+<div class="container mt-5 mb-5">
+
+<!-- IMAGE -->
+<div class="row mb-4">
+<div class="col-md-12">
+<img src="{{ trip.image.url }}"
+class="img-fluid w-100 trip-image">
+</div>
+</div>
+
+<div class="row">
+
+<!-- LEFT -->
+<div class="col-md-8">
+
+<h2 class="trip-title">
+{{ trip.trip_name }}
+
+{% if trip.famous_place %}
+<span class="badge-famous ml-2">⭐ Famous</span>
+{% endif %}
+</h2>
+
+<p class="text-muted">
+📍 {{ trip.destination }} • {{ trip.package_days }} Days Package
+</p>
+
+<hr>
+
+<h5>About this Trip</h5>
+<p class="text-secondary">
+<ul>
+
+{% for line in trip.description.splitlines %}
+
+    {% if line %}
+        <li>{{ line }}</li>
+    {% endif %}
+
+{% endfor %}
+
+</ul>
+</p>
+
+<hr>
+
+<h5>Route</h5>
+<p class="text-secondary">
+<ul>
+
+{% for line in trip.route.splitlines %}
+
+    {% if line %}
+        <li>{{ line }}</li>
+    {% endif %}
+
+{% endfor %}
+
+</ul>
+</p>
+
+<hr>
+
+<!-- 🔥 INCLUSIONS -->
+<div class="info-card inclusion-card">
+
+<h5 class="info-title">Inclusions</h5>
+
+<ul class="info-list">
+<li><span class="icon-check">✔</span> Accommodation in 5 Star Hotel</li>
+<li><span class="icon-check">✔</span> Daily Breakfast at the Hotel</li>
+<li><span class="icon-check">✔</span> A/C Cab for transfers & sightseeing</li>
+<li><span class="icon-check">✔</span> Toll, Parking & Fuel Charges</li>
+<li><span class="icon-check">✔</span> All Applicable Hotel Taxes</li>
+<li><span class="icon-check">✔</span> Daily Lunch at the Hotel</li>
+<li><span class="icon-check">✔</span> Daily Dinner at the Hotel</li>
+</ul>
+
+</div>
+
+<!-- 🔥 EXCLUSIONS -->
+<div class="info-card exclusion-card">
+
+<h5 class="info-title">Exclusions</h5>
+
+<ul class="info-list">
+<li><span class="icon-cross">✖</span> 5% GST</li>
+<li><span class="icon-cross">✖</span> Entry Fees & Activities</li>
+<li><span class="icon-cross">✖</span> Anything Not Mentioned</li>
+<li><span class="icon-cross">✖</span> Guide & Personal Expenses</li>
+</ul>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="col-md-4">
+
+<div class="booking-box">
+
+<h4 class="price-tag">
+₹ {{ trip.price_without_guide }}
+<small class="text-muted">starting</small>
+</h4>
+
+<p class="text-muted">
+Package: {{ trip.package_days }} Days
+</p>
+
+<hr>
+
+<form method="post">
+{% csrf_token %}
+
+{% if error %}
+<div class="alert alert-danger">
+{{ error }}
+</div>
+{% endif %}
+
+<div class="form-group">
+<label>Start Date</label>
+<input type="date" name="start_date" class="form-control" required>
+</div>
+
+<div class="form-group">
+<label>End Date</label>
+<input type="date" name="end_date" class="form-control" required>
+</div>
+
+<div class="form-group">
+<label>Select Option</label>
+
+<select name="guide" class="form-control">
+<option value="Without Guide">
+Without Guide - ₹{{ trip.price_without_guide }}
+</option>
+
+<option value="Guide">
+With Guide - ₹{{ trip.price_with_guide }}
+</option>
+</select>
+
+</div>
+
+{% if already_booked %}
+<button class="btn btn-secondary btn-block" disabled>
+Already Booked
+</button>
+{% else %}
+<button type="submit" class="btn btn-danger btn-block">
+Book Now
+</button>
+{% endif %}
+{% if popup_error %}
+<script>
+    alert("❌ {{ popup_error }}");
+</script>
+{% endif %}
+</form>
+
+<p class="text-center text-muted mt-3">
+Secure booking powered by <br>
+The Grand Reserve
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% include 'partials/footer.html' %}
+
+</body>
+</html>

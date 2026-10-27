@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Verify OTP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f3f4f6;
+    font-family:'Inter',sans-serif;
+}
+
+.otp-card{
+    background:#fff;
+    padding:40px;
+    border-radius:18px;
+    width:360px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+}
+
+h2{
+    margin-bottom:10px;
+    font-size:24px;
+    color:#111827;
+}
+
+p{
+    color:#6b7280;
+    font-size:14px;
+}
+
+.otp-boxes{
+    display:flex;
+    justify-content:space-between;
+    margin:25px 0;
+}
+
+.otp-boxes input{
+    width:45px;
+    height:55px;
+    text-align:center;
+    font-size:22px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    outline:none;
+    transition:0.3s;
+}
+
+.otp-boxes input:focus{
+    border-color:#111827;
+    transform:scale(1.05);
+}
+
+.btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#111827;
+    color:#fff;
+    font-size:15px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#000;
+}
+
+.resend-btn{
+    background:none;
+    border:none;
+    color:#2563eb;
+    margin-top:15px;
+    cursor:pointer;
+}
+
+.timer{
+    margin-top:10px;
+    color:#ef4444;
+    font-size:13px;
+}
+
+.error{
+    color:red;
+    margin-top:10px;
+    font-size:14px;
+}
+
+.success{
+    color:green;
+    margin-top:10px;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="otp-card">
+
+<h2>Verify OTP</h2>
+
+<p>Enter the 6-digit code sent to your email</p>
+
+<form method="post">
+{% csrf_token %}
+
+<div class="otp-boxes">
+
+    <input type="text" maxlength="1" class="otp-input">
+    <input type="text" maxlength="1" class="otp-input">
+    <input type="text" maxlength="1" class="otp-input">
+    <input type="text" maxlength="1" class="otp-input">
+    <input type="text" maxlength="1" class="otp-input">
+    <input type="text" maxlength="1" class="otp-input">
+
+</div>
+
+<input type="hidden" name="otp" id="final-otp">
+
+<button type="submit" class="btn">
+    Verify OTP
+</button>
+
+</form>
+
+<!-- RESEND -->
+<form method="post">
+{% csrf_token %}
+<input type="hidden" name="resend" value="1">
+
+<button class="resend-btn">
+    Resend OTP
+</button>
+
+</form>
+
+<div class="timer" id="timer">
+    OTP expires in 02:00
+</div>
+
+{% if error %}
+<div class="error">
+    {{ error }}
+</div>
+{% endif %}
+
+{% if success %}
+<div class="success">
+    {{ success }}
+</div>
+{% endif %}
+
+</div>
+
+<script>
+
+const inputs = document.querySelectorAll('.otp-input');
+const finalOtp = document.getElementById('final-otp');
+
+inputs.forEach((input, index) => {
+
+    input.addEventListener('input', () => {
+
+        if(input.value.length === 1 && index < inputs.length - 1){
+            inputs[index + 1].focus();
+        }
+
+        let otp = '';
+
+        inputs.forEach(box => {
+            otp += box.value;
+        });
+
+        finalOtp.value = otp;
+    });
+
+});
+
+
+// 🔥 TIMER
+let time = 120;
+
+const timer = document.getElementById('timer');
+
+setInterval(() => {
+
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    timer.innerHTML =
+        `OTP expires in ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+    if(time > 0){
+        time--;
+    }
+
+}, 1000);
+
+</script>
+
+</body>
+</html>

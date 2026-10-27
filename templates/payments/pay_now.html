@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment | The Grand Reservations</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card shadow-sm col-md-6 mx-auto">
+        <div class="card-body">
+
+            <h4 class="mb-3">Payment</h4>
+
+            <p><strong>Room:</strong> {{ booking.room.room_number }}</p>
+            <p><strong>Total Amount:</strong> ₹{{ booking.total_amount }}</p>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>Select Payment Method</label>
+                    <select name="payment_method" class="form-control" required>
+                        <option value="UPI">UPI</option>
+                        <option value="Card">Card</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-danger btn-block">
+                    Pay Now
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
