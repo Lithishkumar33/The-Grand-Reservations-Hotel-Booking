@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}The Grand Reservations{% endblock %}
 
@@ -6,11 +7,11 @@
 <style>
 
 body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background:#000;
-color:#fff;
-overflow-x:hidden;
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
 }
 
 /* LOADER */
@@ -60,137 +61,195 @@ overflow-x:hidden;
 
 /* HERO */
 .hero{
-position:relative;
-height:100vh;
-overflow:hidden;
+    position:relative;
+    min-height:100vh;
+    min-height:100dvh;
+    height:auto;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 15px;
 }
 
 .hero-bg{
-position:absolute;
-width:100%;
-height:100%;
-background:url("https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1") center/cover no-repeat;
-animation:zoomBg 20s ease-in-out infinite alternate;
-z-index:-2;
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    background:url("https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1") center/cover no-repeat;
+    animation:zoomBg 20s ease-in-out infinite alternate;
+    z-index:-2;
 }
 
 /* OVERLAY */
 .hero::after{
-content:"";
-position:absolute;
-width:100%;
-height:100%;
-background:linear-gradient(
-to top,
-rgba(0,0,0,0.95),
-rgba(0,0,0,0.5)
-);
-z-index:-1;
+    content:"";
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.95),
+        rgba(0,0,0,0.5)
+    );
+    z-index:-1;
 }
 
 /* CONTENT */
 .hero-content{
-height:100%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-animation:fadeUp 1.5s ease;
+    width:100%;
+    max-width:850px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    animation:fadeUp 1.5s ease;
+    padding:20px 10px;
 }
 
 /* TITLE */
 .hero-title{
-font-size:60px;
-font-weight:700;
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-perspective:1000px;
+    font-size: clamp(30px, 6vw, 60px);
+    font-weight:700;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    perspective:1000px;
+    line-height:1.2;
+    margin-bottom:15px;
 }
 
-.space{
-width:12px;
+.hero-word{
+    display:inline-flex;
+    white-space:nowrap;
+    margin:0 8px;
 }
 
-.hero-title span{
-display:inline-block;
-opacity:0;
-transform:translateY(80px) scale(0.7) rotateX(90deg);
-animation:
-fadeZoom 1s ease forwards,
-floatWave 3s ease-in-out infinite;
+.hero-word > span{
+    display:inline-block;
+    opacity:0;
+    transform:translateY(80px) scale(0.7) rotateX(90deg);
+    animation:
+        fadeZoom 1s ease forwards,
+        floatWave 3s ease-in-out infinite;
+    text-shadow:0 0 10px rgba(255,255,255,0.4);
 }
 
 /* STAGGER */
-.hero-title span:nth-child(1){animation-delay:0.05s,1.2s;}
-.hero-title span:nth-child(2){animation-delay:0.1s,1.3s;}
-.hero-title span:nth-child(3){animation-delay:0.15s,1.4s;}
-.hero-title span:nth-child(4){animation-delay:0.2s,1.5s;}
-.hero-title span:nth-child(5){animation-delay:0.25s,1.6s;}
-.hero-title span:nth-child(6){animation-delay:0.3s,1.7s;}
-.hero-title span:nth-child(8){animation-delay:0.35s,1.8s;}
-.hero-title span:nth-child(9){animation-delay:0.4s,1.9s;}
-.hero-title span:nth-child(10){animation-delay:0.45s,2s;}
-.hero-title span:nth-child(11){animation-delay:0.5s,2.1s;}
-.hero-title span:nth-child(12){animation-delay:0.55s,2.2s;}
-.hero-title span:nth-child(13){animation-delay:0.6s,2.3s;}
-.hero-title span:nth-child(15){animation-delay:0.65s,2.4s;}
-.hero-title span:nth-child(16){animation-delay:0.7s,2.5s;}
-.hero-title span:nth-child(17){animation-delay:0.75s,2.6s;}
-.hero-title span:nth-child(18){animation-delay:0.8s,2.7s;}
-.hero-title span:nth-child(19){animation-delay:0.85s,2.8s;}
-.hero-title span:nth-child(20){animation-delay:0.9s,2.9s;}
-.hero-title span:nth-child(21){animation-delay:0.95s,3s;}
+.hero-word:nth-child(1) span:nth-child(1){animation-delay:0.05s,1.2s;}
+.hero-word:nth-child(1) span:nth-child(2){animation-delay:0.1s,1.3s;}
+.hero-word:nth-child(1) span:nth-child(3){animation-delay:0.15s,1.4s;}
+.hero-word:nth-child(1) span:nth-child(4){animation-delay:0.2s,1.5s;}
+.hero-word:nth-child(1) span:nth-child(5){animation-delay:0.25s,1.6s;}
+.hero-word:nth-child(1) span:nth-child(6){animation-delay:0.3s,1.7s;}
+
+.hero-word:nth-child(2) span:nth-child(1){animation-delay:0.35s,1.8s;}
+.hero-word:nth-child(2) span:nth-child(2){animation-delay:0.4s,1.9s;}
+.hero-word:nth-child(2) span:nth-child(3){animation-delay:0.45s,2s;}
+.hero-word:nth-child(2) span:nth-child(4){animation-delay:0.5s,2.1s;}
+.hero-word:nth-child(2) span:nth-child(5){animation-delay:0.55s,2.2s;}
+.hero-word:nth-child(2) span:nth-child(6){animation-delay:0.6s,2.3s;}
+
+.hero-word:nth-child(3) span:nth-child(1){animation-delay:0.65s,2.4s;}
+.hero-word:nth-child(3) span:nth-child(2){animation-delay:0.7s,2.5s;}
+.hero-word:nth-child(3) span:nth-child(3){animation-delay:0.75s,2.6s;}
+.hero-word:nth-child(3) span:nth-child(4){animation-delay:0.8s,2.7s;}
+.hero-word:nth-child(3) span:nth-child(5){animation-delay:0.85s,2.8s;}
+.hero-word:nth-child(3) span:nth-child(6){animation-delay:0.9s,2.9s;}
 
 @keyframes fadeZoom{
-0%{opacity:0; transform:translateY(80px) scale(0.7) rotateX(90deg);}
-60%{opacity:1; transform:translateY(-10px) scale(1.05);}
-100%{opacity:1; transform:translateY(0) scale(1);}
+    0%{opacity:0; transform:translateY(80px) scale(0.7) rotateX(90deg);}
+    60%{opacity:1; transform:translateY(-10px) scale(1.05);}
+    100%{opacity:1; transform:translateY(0) scale(1);}
 }
 
 @keyframes floatWave{
-0%{transform:translateY(0);}
-50%{transform:translateY(-6px);}
-100%{transform:translateY(0);}
-}
-
-.hero-title span{
-text-shadow:0 0 10px rgba(255,255,255,0.4);
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-6px);}
+    100%{transform:translateY(0);}
 }
 
 /* BUTTON */
 .btn-explore{
-background:#e50914;
-border:none;
-padding:14px 28px;
-font-weight:600;
-margin-top:20px;
-border-radius:6px;
+    background:#e50914;
+    border:none;
+    padding:14px 30px;
+    font-size:16px;
+    font-weight:600;
+    margin-top:24px;
+    border-radius:8px;
+    color:#fff;
+    text-decoration:none;
+    display:inline-block;
+    transition:transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .btn-explore:hover{
-transform:scale(1.08);
-background:#ff1e1e;
+    transform:scale(1.06);
+    background:#ff1e1e;
+    color:#fff;
+    text-decoration:none;
+    box-shadow:0 10px 25px rgba(229,9,20,0.5);
 }
 
 /* GLASS */
 .glass-box{
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(12px);
-padding:15px 25px;
-border-radius:30px;
-margin-top:20px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    padding:12px 22px;
+    border-radius:30px;
+    margin-top:14px;
+    font-size:14px;
+    line-height:1.4;
+    max-width:92%;
+    border:1px solid rgba(255,255,255,0.1);
+    word-break:break-word;
 }
 
 @keyframes fadeUp{
-from{opacity:0; transform:translateY(40px);}
-to{opacity:1; transform:translateY(0);}
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
 @keyframes zoomBg{
-from{transform:scale(1);}
-to{transform:scale(1.15);}
+    from{transform:scale(1);}
+    to{transform:scale(1.15);}
+}
+
+@media (max-width: 576px) {
+    .hero{
+        padding:25px 12px;
+    }
+    .hero-title{
+        font-size:32px;
+    }
+    .hero-word{
+        margin:3px 5px;
+    }
+    .glass-box{
+        font-size:12px;
+        padding:9px 15px;
+        border-radius:20px;
+    }
+    .btn-explore{
+        padding:12px 24px;
+        font-size:14px;
+        margin-top:18px;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-title{
+        font-size:26px;
+    }
+    .glass-box{
+        font-size:11px;
+    }
 }
 
 </style>
@@ -205,11 +264,15 @@ to{transform:scale(1.15);}
 <div class="hero-content">
 
 <h1 class="hero-title">
-<span>T</span><span>r</span><span>a</span><span>v</span><span>e</span><span>l</span>
-<span class="space"></span>
-<span>B</span><span>e</span><span>y</span><span>o</span><span>n</span><span>d</span>
-<span class="space"></span>
-<span>L</span><span>i</span><span>m</span><span>i</span><span>t</span><span>s</span>
+    <span class="hero-word">
+        <span>T</span><span>r</span><span>a</span><span>v</span><span>e</span><span>l</span>
+    </span>
+    <span class="hero-word">
+        <span>B</span><span>e</span><span>y</span><span>o</span><span>n</span><span>d</span>
+    </span>
+    <span class="hero-word">
+        <span>L</span><span>i</span><span>m</span><span>i</span><span>t</span><span>s</span>
+    </span>
 </h1>
 
 <div class="glass-box">

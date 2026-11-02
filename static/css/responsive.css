@@ -154,41 +154,47 @@ img, video, iframe {
    -------------------------------------------------------------------------- */
 @media (max-width: 991.98px) {
     .hero {
-        min-height: 100vh;
-        height: auto;
-        padding: 60px 15px 40px;
+        min-height: 100vh !important;
+        min-height: 100dvh !important;
+        height: auto !important;
+        padding: 60px 15px 40px !important;
     }
 
     .hero-title {
-        font-size: 44px !important;
+        font-size: 40px !important;
     }
 
     .glass-box {
         font-size: 13px !important;
-        padding: 12px 20px !important;
-        max-width: 90%;
+        padding: 11px 20px !important;
+        max-width: 92% !important;
     }
 }
 
 @media (max-width: 576px) {
-    .hero-title {
-        font-size: 28px !important;
-        line-height: 1.25;
+    .hero {
+        padding: 30px 12px 25px !important;
     }
 
-    .hero-title .space {
-        width: 8px !important;
+    .hero-title {
+        font-size: 30px !important;
+        line-height: 1.25 !important;
+    }
+
+    .hero-word {
+        margin: 2px 4px !important;
     }
 
     .glass-box {
         font-size: 11.5px !important;
-        padding: 10px 14px !important;
+        padding: 9px 15px !important;
         border-radius: 20px !important;
     }
 
     .btn-explore {
         padding: 12px 24px !important;
         font-size: 14px !important;
+        margin-top: 18px !important;
     }
 }
 
@@ -375,18 +381,48 @@ img, video, iframe {
 /* --------------------------------------------------------------------------
    8. AUTHENTICATION PAGES (login, signup, admin login)
    -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+    .auth-box {
+        flex-direction: column !important;
+        max-width: 480px !important;
+        margin: 0 auto !important;
+    }
+
+    .auth-left {
+        padding: 28px 24px 20px !important;
+        text-align: center !important;
+    }
+
+    .auth-left img {
+        height: 180px !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .auth-right {
+        padding: 32px 24px !important;
+        width: 100% !important;
+    }
+}
+
 @media (max-width: 768px) {
     .top-bar {
         padding: 14px 18px !important;
     }
 
     .brand {
-        font-size: 20px !important;
+        font-size: 18px !important;
     }
 
-    .admin-btn {
+    .admin-btn, .login-nav-btn {
         padding: 6px 14px !important;
         font-size: 12px !important;
+    }
+
+    .auth-container {
+        padding: 16px 14px 35px !important;
+        min-height: calc(100vh - 65px) !important;
+        height: auto !important;
     }
 }
 
@@ -396,8 +432,38 @@ img, video, iframe {
     }
 
     .brand {
-        font-size: 16px !important;
-        letter-spacing: 1px !important;
+        font-size: 15px !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    .admin-btn, .login-nav-btn {
+        padding: 5px 12px !important;
+        font-size: 11px !important;
+    }
+
+    .auth-container {
+        padding: 10px 10px 30px !important;
+    }
+
+    .auth-left {
+        display: none !important;
+    }
+
+    .auth-right {
+        padding: 26px 18px !important;
+        border-radius: 20px !important;
+        width: 100% !important;
+    }
+
+    .auth-right h4 {
+        font-size: 21px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .admin-card {
+        padding: 24px 18px !important;
+        margin: 15px !important;
+        max-width: calc(100% - 30px) !important;
     }
 }
 

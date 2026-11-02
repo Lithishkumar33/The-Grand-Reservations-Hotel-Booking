@@ -2,243 +2,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Signup | The Grand Reservations</title>
+    <title>Sign Up | The Grand Reservations</title>
 
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
 
-<style>
+    <style>
 
-* {
-    box-sizing: border-box;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
-    margin: 0;
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            min-height: 100dvh;
+            margin: 0;
 
-    background: linear-gradient(-60deg,#0f172a,#1e3a8a,#6d28d9,#be185d);
-    background-size: 500% 500%;
-    animation: gradientMove 10s ease infinite;
+            background: linear-gradient(-60deg,#0f172a,#1e3a8a,#6d28d9,#be185d);
+            background-size: 500% 500%;
+            animation: gradientMove 10s ease infinite;
 
-    color: #fff;
-}
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-/* TOP BAR */
-.top-bar {
-    padding: 15px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
+        /* TOP BAR */
+        .top-bar {
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
 
-.brand {
-    font-family: 'Cinzel', serif;
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: 2px;
-}
+        .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
 
-.admin-btn {
-    border: 1px solid rgba(255,255,255,0.4);
-    padding: 8px 18px;
-    border-radius: 25px;
-    text-decoration: none;
-    color: #fff;
-    transition: 0.3s;
-}
+        .login-nav-btn {
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 7px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 13px;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
 
-.admin-btn:hover {
-    background: rgba(255,255,255,0.15);
-}
+        .login-nav-btn:hover {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            text-decoration: none;
+        }
 
-/* MAIN */
-.auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 50px);
-    padding: 20px;
-}
+        /* MAIN */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 75px);
+            min-height: calc(100dvh - 75px);
+            padding: 20px 16px 40px;
+        }
 
-.auth-box {
-    display: flex;
-    width: 100%;
-    max-width: 900px;   /* 🔥 reduced from 1000px */
+        .auth-box {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
 
-    border-radius: 20px;
-    overflow: hidden;
+            border-radius: 20px;
+            overflow: hidden;
 
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(18px);
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-}
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            animation: fadeUp 0.8s ease;
+        }
 
-/* LEFT IMAGE */
-.auth-left {
-    flex: 0.9;
-   max-height: 500px;
-}
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.auth-left img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+        /* LEFT IMAGE */
+        .auth-left {
+            flex: 0.9;
+            min-height: 460px;
+            position: relative;
+        }
 
-/* RIGHT FORM */
-.auth-right {
-    flex: 1.1;
-    background: #ffffff;
-    color: #111;
-    padding: 40px;
-}
+        .auth-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            inset: 0;
+        }
 
-.auth-right h4 {
-    font-weight: 600;
-    margin-bottom: 20px;
-}
+        /* RIGHT FORM */
+        .auth-right {
+            flex: 1.1;
+            background: #ffffff;
+            color: #111;
+            padding: 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-/* INPUT */
-.form-control {
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    transition: 0.3s;
-}
+        .auth-right h4 {
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
 
-.form-control:focus {
-    border-color: #6366f1;
-    box-shadow: 0 0 10px rgba(99,102,241,0.4);
-}
+        /* INPUT */
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            padding: 12px 14px;
+            font-size: 14.5px;
+            height: auto;
+            transition: 0.3s;
+        }
 
-/* BUTTON */
-.btn-signup {
-    background: linear-gradient(45deg,#6366f1,#ec4899);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    transition: 0.3s;
-}
+        .form-control:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 10px rgba(99,102,241,0.35);
+        }
 
-.btn-signup:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(236,72,153,0.5);
-}
+        /* BUTTON */
+        .btn-signup {
+            background: linear-gradient(45deg,#6366f1,#ec4899);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            padding: 12px;
+            font-size: 15px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
 
-.login-link {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-}
+        .btn-signup:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(236,72,153,0.5);
+            color: #fff;
+        }
 
-.login-link a {
-    color: #6366f1;
-    font-weight: 500;
-}
+        .login-link {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 14px;
+            color: #4b5563;
+        }
 
-</style>
+        .login-link a {
+            color: #6366f1;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 991.98px) {
+            .auth-box {
+                flex-direction: column;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .auth-left {
+                flex: none;
+                height: 180px;
+                min-height: 180px;
+            }
+
+            .auth-right {
+                padding: 32px 24px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .top-bar {
+                padding: 12px 14px;
+            }
+
+            .brand {
+                font-size: 16px;
+                letter-spacing: 1px;
+            }
+
+            .login-nav-btn {
+                padding: 5px 12px;
+                font-size: 11px;
+            }
+
+            .auth-container {
+                padding: 12px 12px 30px;
+            }
+
+            .auth-left {
+                display: none; /* Focus on form for mobile viewports */
+            }
+
+            .auth-right {
+                padding: 28px 18px;
+                border-radius: 20px;
+            }
+
+            .auth-right h4 {
+                font-size: 21px;
+                margin-bottom: 16px;
+            }
+        }
+
+    </style>
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 </head>
 
 <body>
 
 <div class="top-bar">
-    <div class="brand">The Grand Reservations</div>
+    <a href="{% url 'home' %}" style="color: inherit; text-decoration: none;">
+        <div class="brand">The Grand Reservations</div>
+    </a>
+    <a href="/accounts/login/" class="login-nav-btn">Log In</a>
 </div>
 
 <div class="auth-container">
 
 <div class="auth-box">
 
-    <!-- LEFT IMAGE -->
+    <!-- LEFT IMAGE (hidden on small phones) -->
     <div class="auth-left">
-        <img src="{% static 'images/goa1.jpg' %}">
+        <img src="{% static 'images/goa1.jpg' %}" alt="Goa Resort">
     </div>
 
     <!-- RIGHT FORM -->
     <div class="auth-right">
 
         <h4>Create Account</h4>
-        <!-- 🔥 ERROR MESSAGE -->
 
-{% if error %}
+        {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show mt-2">
+            {{ error }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        {% endif %}
 
-<div class="alert alert-danger alert-dismissible fade show mt-3">
-
-    {{ error }}
-
-    <button type="button"
-            class="close"
-            data-dismiss="alert">
-
-        &times;
-
-    </button>
-
-</div>
-
-{% endif %}
-
-<!-- 🔥 SUCCESS MESSAGE -->
-
-{% if messages %}
-
-    {% for message in messages %}
-
-    <div class="alert alert-success alert-dismissible fade show mt-3">
-
-        {{ message }}
-
-        <button type="button"
-                class="close"
-                data-dismiss="alert">
-
-            &times;
-
-        </button>
-
-    </div>
-
-    {% endfor %}
-
-{% endif %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show mt-2">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endfor %}
+        {% endif %}
 
         <form method="post">
             {% csrf_token %}
 
             <div class="form-group">
-                <label>Username</label>
-                <input name="username" class="form-control" required>
+                <label style="font-weight: 500; font-size: 13.5px; margin-bottom: 6px;">Username</label>
+                <input name="username" class="form-control" placeholder="Choose a username" required>
             </div>
 
             <div class="form-group">
-                <label>Email</label>
-                <input name="email" type="email" class="form-control" required>
+                <label style="font-weight: 500; font-size: 13.5px; margin-bottom: 6px;">Email Address</label>
+                <input name="email" type="email" class="form-control" placeholder="name@example.com" required>
             </div>
 
             <div class="form-group">
-                <label>Password</label>
-                <input name="password" type="password" class="form-control" required
-                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$"
-
-        title="Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
-                
-                >
+                <label style="font-weight: 500; font-size: 13.5px; margin-bottom: 6px;">Password</label>
+                <input name="password" type="password" class="form-control"
+                       placeholder="At least 8 chars, 1 upper, 1 special"
+                       required
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$"
+                       title="Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.">
             </div>
 
             <button class="btn btn-signup btn-block mt-3">
@@ -257,8 +326,8 @@ body {
 </div>
 
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
