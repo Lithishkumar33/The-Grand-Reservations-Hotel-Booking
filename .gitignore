@@ -26,3 +26,4 @@ media/trips/
 .idea/
 *.swp
 *.swo
+.vercel
