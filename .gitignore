@@ -27,3 +27,6 @@ media/trips/
 *.swp
 *.swo
 .vercel
+
+staticfiles/
+staticfiles_build/
