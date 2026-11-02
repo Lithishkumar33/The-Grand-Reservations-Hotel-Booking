@@ -1,0 +1,420 @@
+/* ==========================================================================
+   THE GRAND RESERVATIONS — UNIVERSAL RESPONSIVE STYLESHEET
+   Supports Mobile (320px+), Tablets (768px+), Laptops (1024px+), 4K Desktops
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. GLOBAL RESETS & FLUID BASE
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+.container, .container-fluid {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* --------------------------------------------------------------------------
+   2. NAVBAR RESPONSIVENESS (.premium-navbar)
+   -------------------------------------------------------------------------- */
+.premium-navbar {
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    max-width: calc(100% - 60px);
+}
+
+.brand-img {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.25s ease;
+}
+
+.brand-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Mobile Toggler */
+.navbar-toggler {
+    padding: 6px 10px;
+    font-size: 1.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    outline: none !important;
+    transition: background 0.2s ease;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+/* Collapse Navigation Menu on Mobile/Tablet */
+@media (max-width: 991.98px) {
+    .premium-navbar {
+        padding: 8px 14px !important;
+    }
+
+    .brand-img {
+        height: 38px;
+        margin-right: 8px !important;
+    }
+
+    .brand-text {
+        font-size: 13px !important;
+        letter-spacing: 1px !important;
+    }
+
+    .navbar-collapse {
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        padding: 16px;
+        margin-top: 10px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .navbar-nav {
+        align-items: stretch !important;
+    }
+
+    .navbar-nav .nav-item {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .navbar-nav .nav-item:last-child {
+        border-bottom: none;
+    }
+
+    .navbar-nav .nav-link {
+        margin: 0 !important;
+        padding: 12px 14px !important;
+        font-size: 12px !important;
+        display: block;
+        width: 100%;
+    }
+
+    .navbar-nav .dropdown-menu {
+        position: static !important;
+        float: none !important;
+        width: 100%;
+        margin-top: 8px;
+        background: rgba(255, 255, 255, 0.96);
+        text-align: center;
+        box-shadow: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-text {
+        font-size: 11.5px !important;
+        letter-spacing: 0.5px !important;
+        max-width: 180px;
+    }
+
+    .brand-img {
+        height: 32px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   3. LANDING PAGE & HERO
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+    .hero {
+        min-height: 100vh;
+        height: auto;
+        padding: 60px 15px 40px;
+    }
+
+    .hero-title {
+        font-size: 44px !important;
+    }
+
+    .glass-box {
+        font-size: 13px !important;
+        padding: 12px 20px !important;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 28px !important;
+        line-height: 1.25;
+    }
+
+    .hero-title .space {
+        width: 8px !important;
+    }
+
+    .glass-box {
+        font-size: 11.5px !important;
+        padding: 10px 14px !important;
+        border-radius: 20px !important;
+    }
+
+    .btn-explore {
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   4. ROOMS & TRIPS CARDS / GRIDS
+   -------------------------------------------------------------------------- */
+.room-card, .trip-card, .dest-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.room-img, .trip-img, .dest-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.room-body, .trip-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 16px !important;
+}
+
+@media (max-width: 768px) {
+    .room-container {
+        padding: 30px 10px !important;
+    }
+
+    .page-header {
+        margin: 25px 0 !important;
+    }
+
+    .page-header h2, .page-title h2 {
+        font-size: 1.5rem;
+    }
+
+    .search-box {
+        padding: 12px !important;
+        margin-bottom: 25px !important;
+    }
+
+    .search-box .col-md-8,
+    .search-box .col-md-4 {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    .search-box button {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .room-img, .trip-img {
+        height: 180px !important;
+    }
+
+    .dest-img {
+        height: 150px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .room-img, .trip-img {
+        height: 160px !important;
+    }
+
+    .room-title, .trip-title {
+        font-size: 15px !important;
+    }
+
+    .room-price, .trip-price {
+        font-size: 16px !important;
+    }
+
+    .btn-view, .btn-book {
+        padding: 8px 14px !important;
+        font-size: 13px !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   5. DETAIL PAGES (room_detail.html & trip_detail.html)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+    .carousel-item img,
+    .trip-image {
+        height: 300px !important;
+    }
+
+    .booking-box,
+    .price-box {
+        position: static !important;
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-item img,
+    .trip-image {
+        height: 220px !important;
+        border-radius: 12px;
+    }
+
+    .room-title, .trip-title {
+        font-size: 1.35rem !important;
+    }
+
+    .package-box {
+        padding: 12px !important;
+        font-size: 13px;
+    }
+
+    .price-box, .booking-box {
+        padding: 16px !important;
+        border-radius: 12px !important;
+    }
+
+    .info-card {
+        padding: 16px !important;
+    }
+
+    .info-title {
+        font-size: 17px !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   6. RESPONSIVE TABLES & BOXES (my_bookings, my_trips, admin tables)
+   -------------------------------------------------------------------------- */
+.table-box, .table-card {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.table-box table, .table-card table {
+    min-width: 600px;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .table-box, .table-card {
+        padding: 8px !important;
+        margin-left: -5px;
+        margin-right: -5px;
+        width: calc(100% + 10px);
+    }
+
+    .btn-action {
+        display: inline-block;
+        margin: 2px 1px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   7. INVOICE RESPONSIVENESS
+   -------------------------------------------------------------------------- */
+@media (max-width: 576px) {
+    .invoice-card {
+        padding: 16px !important;
+    }
+
+    .invoice-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+
+    .invoice-meta {
+        text-align: left !important;
+    }
+
+    .hotel-name {
+        font-size: 18px !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   8. AUTHENTICATION PAGES (login, signup, admin login)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .top-bar {
+        padding: 14px 18px !important;
+    }
+
+    .brand {
+        font-size: 20px !important;
+    }
+
+    .admin-btn {
+        padding: 6px 14px !important;
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .top-bar {
+        padding: 12px 14px !important;
+    }
+
+    .brand {
+        font-size: 16px !important;
+        letter-spacing: 1px !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   9. POPUP MESSAGES RESPONSIVENESS
+   -------------------------------------------------------------------------- */
+@media (max-width: 576px) {
+    .message-container {
+        top: 70px !important;
+        right: 12px !important;
+        left: 12px !important;
+        width: calc(100% - 24px) !important;
+    }
+
+    .custom-message {
+        width: 100%;
+        font-size: 13px !important;
+        padding: 10px 14px !important;
+    }
+}

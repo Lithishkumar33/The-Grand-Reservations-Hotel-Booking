@@ -1,7 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Trips</title>
 
     <link rel="stylesheet"
@@ -163,6 +165,7 @@ body {
 }
 
 </style>
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 </head>
 
 <body>
@@ -176,7 +179,7 @@ body {
     <div class="row">
 
         {% for booking in bookings %}
-        <div class="col-md-3 mb-4">
+        <div class="col-12 col-sm-6 col-lg-3 mb-4">
 
             <div class="trip-card">
 

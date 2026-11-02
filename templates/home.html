@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rooms | The Grand Reservations</title>
 
     <!-- Bootstrap -->
@@ -142,6 +143,7 @@
 }
 
     </style>
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 </head>
 
 <body>
@@ -215,7 +217,7 @@
        {% for data, value in grouped_hotels.items %}
 {% with hotel=data.0 location=data.1 rooms=value.rooms image=value.image %}
 
-<div class="col-md-4 mb-4">
+<div class="col-12 col-sm-6 col-lg-4 mb-4">
 
     <div class="room-card">
 
@@ -234,7 +236,7 @@
     📍 {{ location }}
 </p>
 
-<button class="btn btn-book"
+<button class="btn btn-book btn-block"
         onclick="toggleRooms('{{ forloop.counter }}')">
     View Rooms →
 </button>
@@ -253,7 +255,7 @@
     <div class="row">
 
         {% for room in rooms %}
-        <div class="col-md-3 mb-3">
+        <div class="col-12 col-sm-6 col-lg-3 mb-3">
 
             <div style="color: #f8fafc;" class="room-card p-3">
 

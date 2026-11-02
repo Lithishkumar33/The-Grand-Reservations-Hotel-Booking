@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -181,6 +182,7 @@ body {
     }
 }
 </style>
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 </head>
 
 <body>
@@ -334,6 +336,34 @@ window.addEventListener("load", () => {
 
 });
 
+</script>
+
+
+<!-- Mobile Navbar Toggle Fallback -->
+<script id="navbarToggleScript">
+document.addEventListener("DOMContentLoaded", function() {
+    var toggler = document.querySelector(".navbar-toggler");
+    var collapse = document.getElementById("navbarNav");
+    if (toggler && collapse) {
+        toggler.addEventListener("click", function(e) {
+            e.preventDefault();
+            collapse.classList.toggle("show");
+        });
+    }
+    var userDrop = document.getElementById("userDropdown");
+    if (userDrop) {
+        var menu = userDrop.nextElementSibling;
+        userDrop.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (menu) menu.classList.toggle("show");
+        });
+        document.addEventListener("click", function(e) {
+            if (!userDrop.contains(e.target) && menu && !menu.contains(e.target)) {
+                menu.classList.remove("show");
+            }
+        });
+    }
+});
 </script>
 
 </body>

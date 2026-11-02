@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dream Destinations | The Grand Reserve</title>
 
     <link rel="stylesheet"
@@ -109,6 +110,7 @@
 
     </style>
 
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 </head>
 
 <body>
@@ -127,7 +129,7 @@
     <div class="row mb-5">
 
         {% for place in famous %}
-        <div class="col-md-3 mb-4">
+        <div class="col-6 col-md-3 mb-3 mb-md-4">
 
             <div class="dest-card">
 
@@ -157,7 +159,7 @@
 
             <div class="row justify-content-center">
 
-                <div class="col-md-4">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-4">
 
                     <select name="package_days"
                             class="form-control"
@@ -188,7 +190,7 @@
     <div class="row">
 
         {% for trip in trips %}
-        <div class="col-md-4 mb-4">
+        <div class="col-12 col-sm-6 col-lg-4 mb-4">
 
             <div class="trip-card">
 

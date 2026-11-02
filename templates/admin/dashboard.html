@@ -61,28 +61,28 @@ body {
     <!-- STATS -->
     <div class="row">
 
-        <div class="col-md-3">
+        <div class="col-6 col-md-3 mb-3">
             <div class="stat-card">
                 <div class="stat-value counter" data-target="{{ total_rooms|default:0 }}">0</div>
                 <small>Total Rooms</small>
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-6 col-md-3 mb-3">
             <div class="stat-card">
                 <div class="stat-value counter" data-target="{{ available_rooms|default:0 }}">0</div>
                 <small>Available Rooms</small>
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-6 col-md-3 mb-3">
             <div class="stat-card">
                 <div class="stat-value counter" data-target="{{ total_bookings|default:0 }}">0</div>
                 <small>Bookings</small>
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-6 col-md-3 mb-3">
             <div class="stat-card">
                 <div class="stat-value counter" data-target="{{ total_payments|default:0 }}">0</div>
                 <small>Revenue</small>
@@ -94,14 +94,14 @@ body {
     <!-- CHARTS -->
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-12 col-lg-6 mb-3">
             <div class="chart-card">
                 <h5>Bookings Overview</h5>
                 <canvas id="bookingChart"></canvas>
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-12 col-lg-6 mb-3">
             <div class="chart-card">
                 <h5>Trips vs Rooms</h5>
                 <canvas id="tripChart"></canvas>

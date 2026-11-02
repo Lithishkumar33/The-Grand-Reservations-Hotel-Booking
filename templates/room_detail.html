@@ -1,6 +1,8 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room {{ room.room_number }} | The Grand Reservations </title>
 
     <link rel="stylesheet"
@@ -38,6 +40,7 @@
             background: #fff5f5;
         }
     </style>
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 </head>
 <body>
 
